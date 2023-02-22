@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+<div class="content">
+	<div class="teapod">
+		<div class="teapod__water" id = 'teapod_water'>
+			<div class="water__temperature" id='teapod_temp'>
+				<span class="celcium_num" id = "celcium_num">20</span> C
+			</div>
+		</div>
+	</div>
+	<form class="params" action="{{ url_for('index') }}" method="POST" id="params">
+		{{ form1.hidden_tag() }}
+		<ul class="params__list">
+			<li class="list__item">
+				<label>Мощность (Вт)</label>
+				{{ form1.power(class_="item__input", id_="power", value_=10000) }}
+			</li>
+			<li class="list__item">
+				<label>Объем (Л)</label>
+				{{ form1.water_volume(class_="item__input", id_="water_volume", value_=1) }}
+			</li>
+			<li class="list__item">
+				<label>Кол-во воды (Л)</label>
+				{{ form1.water_level(class_="item__input", id_="water_level", value_=1) }}
+			</li>
+			<li class="list__item">
+				<label>Начальная температура воды (°C)</label>
+				{{ form1.water_temp(class_="item__input", id_="water_temp", value_=20)|safe }}
+			</li>
+			<li>
+				{{ form1.is_stopped_by_user(class_="hide_input is_stopped", id_="is_stopped_by_user") }}
+				{{ form1.is_boiled(class_="hide_input is_boiled", id_="is_boiled") }}
+				{{ form1.turn_off_temperature(class_="hide_input turn_off_temp", id_="turn_off_temperature") }}
+			</li>
+		</ul>
+		<div class="params__boiling">
+			{{ form1.submit1(class_="on form_button", id_='on') }}
+		</div>
+	</form>
+</div>
+<div>
+	<a style="text-align: center; line-height: 80px; font-size: 42px;" href="{{url_for('boiling_schedule')}}"><h1>Страница с записями БД</h1></a>
+	<a style="text-align: center; line-height: 80px; font-size: 42px;" href="https://github.com/matvxxv/flask_testTeaPod" target="_blank"><h1>Проект на GitHub</h1></a>
+</div>
+{% endblock %}

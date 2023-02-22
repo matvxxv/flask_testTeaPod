@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<h1 style="font-size:42px; line-height: 54px">Такой страницы нет:(</h1>
+<a style="font-size:42px; line-height: 54px" href="{{ url_for('index') }}">Вернуться на главную</a>
+{% endblock %}

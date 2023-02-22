@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<ul>
+  {% if outputs|length > 0 %}
+    {% for o in outputs %}
+      <ul class="db_list">
+        <li class="db_item">
+          {% if o.is_boiled==0 and o.is_stopped_by_user==0%}
+          Запуск чайника
+          {% else %}
+          Остановка чайника
+          {% endif %}
+        </li>
+        <li class="db_item">Мощность: {{ o.power }};</li>
+        <li class="db_item">Объем: {{o.water_volume}};</li>
+        <li class="db_item">Уровень воды: {{o.water_level}};</li>
+        <li class="db_item">Начальная температруа воды: {{o.water_start_temp}};</li>
+        <li class="db_item">Дата включения: {{o.turn_on_date}};</li>
+        <li class="db_item">Дата выключения: {{ o.turn_off_date }};</li>
+        <li class="db_item">Температура при выключении: {{o.turn_off_temperature}}</li>
+        <li class="db_item">
+          Причина выключения чайника:
+          {% if o.is_boiled == 1 %}
+            Вскипел
+          {% elif o.is_stopped_by_user %}
+            Остановка пользователем
+          {% else %}
+            Чайник не выключался
+          {% endif %}
+        <li>
+      </ul>
+    {% endfor %}
+  {% else %}
+    <h1>Чайник еще не включался</h1>
+  {% endif %}
+</ul>
+{% endblock %}
